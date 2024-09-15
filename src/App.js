@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Grid, Paper } from '@mui/material';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const CountdownTimer = () => {
   const initialTime = {
