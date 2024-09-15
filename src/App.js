@@ -38,18 +38,30 @@ const CountdownTimer = () => {
     <Box
       sx={{
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-end', // הזזת הטיימר לתחתית
+        alignItems: 'center',
         height: '100vh',
-        paddingBottom: '30px', // מוסיף מרווח מלמטה
         backgroundImage: 'url(/images/background.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         bgcolor: 'rgba(0, 0, 0, 0.5)', // שכבת כהות על התמונה
-        backgroundBlendMode: 'darken'
+        backgroundBlendMode: 'darken',
+        position: 'relative'
       }}
     >
-      <Paper elevation={3} sx={{ padding: 3, textAlign: 'center', opacity: 0.7, backgroundColor: 'rgba(255, 255, 255, 0.6)', width: '60%' }}> {/* הגדרנו רוחב רחב יותר */}
+      {/* כיתוב A&E ו-Wedding במרכז למעלה */}
+      <Box sx={{ position: 'absolute', top: '20px', textAlign: 'center', width: '100%' }}>
+        <Typography variant="h1" component="div" color="white" sx={{ fontFamily: 'Gabriola', marginBottom: '4px' }}>
+          A & E
+        </Typography>
+        <Typography variant="h3" component="div" color="white" sx={{ fontFamily: 'Gabriola' }}>
+          wedding
+        </Typography>
+      </Box>
+
+      {/* טיימר */}
+      <Paper elevation={3} sx={{ padding: 3, textAlign: 'center', opacity: 0.7, backgroundColor: 'rgba(255, 255, 255, 0.6)', width: '60%', position: 'absolute', bottom: '30px' }}>
         <Grid container spacing={2} direction="row-reverse" justifyContent="center">
           {[
             { label: 'ימים', value: time.days },
