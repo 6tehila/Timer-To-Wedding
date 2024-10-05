@@ -4,8 +4,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const CountdownTimer = () => {
   const initialTime = {
-    days: 30,
-    hours: 4,
+    days: 26,
+    hours: 5,
     minutes: 20,
     seconds: 24
   };
