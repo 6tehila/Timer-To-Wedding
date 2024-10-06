@@ -3,33 +3,38 @@ import { Box, Typography, Grid, Paper } from '@mui/material';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const CountdownTimer = () => {
-  const initialTime = {
-    days: 26,
-    hours: 5,
-    minutes: 20,
-    seconds: 24
+  // תאריך יעד - תאריך החתונה שלך 
+  const weddingDate = new Date('2024-10-30T18:30:00').getTime();
+
+  const calculateTimeLeft = () => {
+    const now = new Date().getTime();
+    const difference = weddingDate - now;
+
+    let timeLeft = {};
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    } else {
+      // במידה והתאריך עבר
+      timeLeft = {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      };
+    }
+    return timeLeft;
   };
 
-  const [time, setTime] = useState(initialTime);
+  const [time, setTime] = useState(calculateTimeLeft());
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
-      setTime((prevTime) => {
-        const { days, hours, minutes, seconds } = prevTime;
-
-        if (seconds > 0) {
-          return { ...prevTime, seconds: seconds - 1 };
-        } else if (minutes > 0) {
-          return { ...prevTime, minutes: minutes - 1, seconds: 59 };
-        } else if (hours > 0) {
-          return { ...prevTime, hours: hours - 1, minutes: 59, seconds: 59 };
-        } else if (days > 0) {
-          return { ...prevTime, days: days - 1, hours: 23, minutes: 59, seconds: 59 };
-        } else {
-          clearInterval(timerInterval);
-          return prevTime;
-        }
-      });
+      setTime(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timerInterval);
@@ -46,12 +51,11 @@ const CountdownTimer = () => {
         backgroundImage: 'url(/images/background.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        bgcolor: 'rgba(0, 0, 0, 0.5)', // שכבת כהות על התמונה
+        bgcolor: 'rgba(0, 0, 0, 0.5)',
         backgroundBlendMode: 'darken',
-        position: 'relative'
+        position: 'relative',
       }}
     >
-      {/* כיתוב A&E ו-Wedding במרכז למעלה */}
       <Box sx={{ position: 'absolute', top: '20px', textAlign: 'center', width: '100%' }}>
         <Typography variant="h1" component="div" color="white" sx={{ fontFamily: 'Gabriola', marginBottom: '4px' }}>
           A & E
@@ -61,7 +65,6 @@ const CountdownTimer = () => {
         </Typography>
       </Box>
 
-      {/* טיימר */}
       <Paper elevation={3} sx={{ padding: 3, textAlign: 'center', opacity: 0.7, backgroundColor: 'rgba(255, 255, 255, 0.6)', width: '60%', position: 'absolute', bottom: '30px' }}>
         <Grid container spacing={2} direction="row-reverse" justifyContent="center">
           {[
@@ -71,10 +74,10 @@ const CountdownTimer = () => {
             { label: 'שניות', value: time.seconds }
           ].map((item, index) => (
             <Grid item key={index} xs={3}>
-              <Typography variant="h3" component="div" color="black"> {/* הגדלנו ל-h3 ושמנו צבע שחור */}
+              <Typography variant="h3" component="div" color="black">
                 {String(item.value).padStart(2, '0')}
               </Typography>
-              <Typography variant="h6" component="div" color="black"> {/* שמנו גם את הכיתוב בשחור */}
+              <Typography variant="h6" component="div" color="black">
                 {item.label}
               </Typography>
             </Grid>
