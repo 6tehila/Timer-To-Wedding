@@ -4,7 +4,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const CountdownTimer = () => {
   // תאריך יעד - תאריך החתונה שלך 
-  const weddingDate = new Date('2024-10-30T18:30:00').getTime();
+  const weddingDate = new Date('2025-03-02T18:30:00').getTime();
 
   const calculateTimeLeft = () => {
     const now = new Date().getTime();
@@ -58,7 +58,7 @@ const CountdownTimer = () => {
     >
       <Box sx={{ position: 'absolute', top: '20px', textAlign: 'center', width: '100%' }}>
         <Typography variant="h1" component="div" color="white" sx={{ fontFamily: 'Gabriola', marginBottom: '4px' }}>
-          A & E
+          T & D
         </Typography>
         <Typography variant="h3" component="div" color="white" sx={{ fontFamily: 'Gabriola' }}>
           wedding
